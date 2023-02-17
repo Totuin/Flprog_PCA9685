@@ -16,7 +16,8 @@ class FLProgPCA9685 : public FLProgI2cBasicSensor
 {
 public:
     FLProgPCA9685(FLProgI2C *device, uint8_t i2c_address = FLPROG_PCA9685_DEFAULT_I2CADDR);
-    void begin(uint16_t workPwm = 50);                                                  // инициализ-я чипа (ID адрес, частота ШИМ в Гц)
+    void begin() { begin(50); };
+    void begin(uint16_t workPwm);                                                       // инициализ-я чипа (ID адрес, частота ШИМ в Гц)
     void analogWrite(uint8_t pin, uint16_t value, uint16_t faze = 0);                   // установка	ШИМ на выходе (№ выхода от 0 до 15, коэффициент заполнения от 0 до 4095, фазовый сдвиг от 0 до 4095)
     void digitalWrite(uint8_t pin, bool value);                                         // установка	логического уровня на выходе (№ выхода от 0 до 15, LOW / HIGH)
     uint16_t analogRead(uint8_t pin);                                                   // чтение коэффициента заполнения на выходе (№ выхода от 0 до 15)
@@ -36,9 +37,9 @@ protected:
     uint16_t pwm;
     bool extclk = false;                                                                                        //	флаг		состояния бита EXTCLK
     bool invrt = false;                                                                                         //	флаг		состояния бита INVRT
-    bool outdrv = true;                                                                                         //	флаг		состояния бита OUTDRV
+    bool outdrvVal = true;                                                                                      //	флаг		состояния бита OUTDRV
     uint8_t outne = 0;                                                                                          //	значение	двух битов OUTNE
     uint16_t angles[16] = {180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180};     //	максимальный угол поворота
     uint16_t angles_min[16] = {170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170}; //	коэффициент заполнения для угла 0°
     uint16_t angles_max[16] = {470, 470, 470, 470, 470, 470, 470, 470, 470, 470, 470, 470, 470, 470, 470, 470}; //	коэффициент заполнения для максимального угла
-}
+};

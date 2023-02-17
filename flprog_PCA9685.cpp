@@ -6,7 +6,7 @@ FLProgPCA9685::FLProgPCA9685(FLProgI2C *device, uint8_t i2c_address)
     addres = i2c_address;
 }
 
-FLProgPCA9685::begin(uint16_t workPwm)
+void FLProgPCA9685::begin(uint16_t workPwm)
 {
     pwm = workPwm;
     setMode();
@@ -27,7 +27,7 @@ void FLProgPCA9685::setMode()
 
     write8(0, 0x30);                             //	отправляем байт данных в регистр MODE1     (устанавливаем флаги AL и SLEEP, остальные флаги сброшены)
     write8(0xFE, j);                             //	отправляем байт данных в регистр PRE_SCALE (устанавливаем предделитель для частоты ШИМ)
-    write8(1, invrt << 4 | outdrv << 2 | outne); //	отправляем байт данных в регистр MODE2     (записываем флаги INVRT, OUTDRV, OUTNE, флаг OCH сброшен)
+    write8(1, invrt << 4 | outdrvVal << 2 | outne); //	отправляем байт данных в регистр MODE2     (записываем флаги INVRT, OUTDRV, OUTNE, флаг OCH сброшен)
     write8(0, extclk << 6 | 0x30);               //	отправляем байт данных в регистр MODE1     (записываем флаг EXTCLK, флаги AL и SLEEP установлены, остальные флаги сброшены)
     write8(0, 0x20);                             //	отправляем байт данных в регистр MODE1     (сбрасываем флаг SLEEP, остальные флаги без изменений) / флаг EXTCLK не сбрасывается записью нуля
     delayMicroseconds(500);                      //	ждём выполнение действий по сбросу флага SLEEP
@@ -135,7 +135,7 @@ void FLProgPCA9685::servoSet(uint8_t pin, uint16_t angle, uint16_t angle_min, ui
     uint8_t k = pin;
     if (pin == FLPROG_PCA9685_SERVO_ALL)
     {
-        i = 15;
+        pin = 15;
         k = 0;
     }
     if (pin >= 16 || angle == 0 || angle > 360 || angle_min > 4095 || angle_max > 4095 || angle_max == 0)
@@ -177,7 +177,7 @@ void FLProgPCA9685::invert(bool value)
 
 void FLProgPCA9685::outdrv(bool value)
 {
-    outdrv = value;
+    outdrvVal = value;
     setMode();
 }
 
@@ -196,7 +196,7 @@ void FLProgPCA9685::extClock(uint16_t value)
     if (value)
     {
         extclk = true;
-        osc = i;
+        osc = value;
         osc *= 1000;
         setMode();
     }
@@ -213,6 +213,6 @@ void FLProgPCA9685::write8(uint8_t addr, uint8_t data)
 {
     i2cDevice->beginTransmission(addres);
     i2cDevice->write(addr);
-    i2cDevice->write(d);
+    i2cDevice->write(data);
     codeError = i2cDevice->endTransmission();
 }
