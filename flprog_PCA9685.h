@@ -1,6 +1,7 @@
 #pragma once
 #include "Arduino.h"
 #include "flprogUtilites.h"
+#include "flprogI2C.h"
 
 #define FLPROG_PCA9685_DEFAULT_I2CADDR 0x40
 
