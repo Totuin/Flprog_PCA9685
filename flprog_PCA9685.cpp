@@ -1,6 +1,6 @@
 #include "flprog_PCA9685.h"
 
-FLProgPCA9685::FLProgPCA9685(FLProgI2C *device, uint8_t i2c_address)
+FLProgPCA9685::FLProgPCA9685(AbstractFLProgI2C *device, uint8_t i2c_address)
 {
     i2cDevice = device;
     addres = i2c_address;

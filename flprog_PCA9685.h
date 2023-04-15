@@ -16,7 +16,7 @@
 class FLProgPCA9685 : public FLProgI2cBasicSensor
 {
 public:
-    FLProgPCA9685(FLProgI2C *device, uint8_t i2c_address = FLPROG_PCA9685_DEFAULT_I2CADDR);
+    FLProgPCA9685(AbstractFLProgI2C *device, uint8_t i2c_address = FLPROG_PCA9685_DEFAULT_I2CADDR);
     void begin() { begin(50); };
     void begin(uint16_t workPwm);                                                       // инициализ-я чипа (ID адрес, частота ШИМ в Гц)
     void analogWrite(uint8_t pin, uint16_t value, uint16_t faze = 0);                   // установка	ШИМ на выходе (№ выхода от 0 до 15, коэффициент заполнения от 0 до 4095, фазовый сдвиг от 0 до 4095)
