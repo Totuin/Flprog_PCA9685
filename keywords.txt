@@ -1,0 +1,32 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+#######################################
+# # Datatypes (KEYWORD1)
+#######################################
+FLProgPCA9685	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+analogRead	KEYWORD2
+analogWrite	KEYWORD2
+begin	KEYWORD2
+digitalWrite	KEYWORD2
+extClock	KEYWORD2
+invert	KEYWORD2
+outState	KEYWORD2
+outdrv	KEYWORD2
+servoSet	KEYWORD2
+servoWrite	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+FLPROG_PCA9685_DEFAULT_I2CADDR	LITERAL1
+FLPROG_PCA9685_IMPEDANCE	LITERAL1
+FLPROG_PCA9685_SERVO_ALL	LITERAL1
+FLPROG_PCA9685_SERVO_FutabaS3003	LITERAL1
+FLPROG_PCA9685_SERVO_MG90	LITERAL1
+FLPROG_PCA9685_SERVO_MG996R	LITERAL1
+FLPROG_PCA9685_SERVO_SG90	LITERAL1
