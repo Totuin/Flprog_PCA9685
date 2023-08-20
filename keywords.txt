@@ -15,8 +15,8 @@ begin	KEYWORD2
 digitalWrite	KEYWORD2
 extClock	KEYWORD2
 invert	KEYWORD2
-outState	KEYWORD2
 outdrv	KEYWORD2
+outState	KEYWORD2
 servoSet	KEYWORD2
 servoWrite	KEYWORD2
 
